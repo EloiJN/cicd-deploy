@@ -13,36 +13,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
-    # Installation des dépendances Composer
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.2'
-        extensions: mbstring, openssl, pdo_mysql
-    
-    - name: Install Composer dependencies
-      run: composer install --no-dev --optimize-autoloader
-    
-    # Création du .env si nécessaire (à partir de secrets GitHub)
-    - name: Create .env file
-      run: |
-        echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
-    
-    # Déploiement FTP
     - name: Deploy to O2switch via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: ftp.njdev.re
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /www/laravel-api/  # ⚠️ À adapter selon votre structure O2switch
-        dangerous-clean-slate: false   # ✅ NE PAS supprimer tous les fichiers
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          **/tests/**
-          **/.github/**
-          **/.env.example
-          **/README.md
-          **/phpunit.xml
+        server-dir: /
+        dangerous-clean-slate: false
