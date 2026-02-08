@@ -13,10 +13,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
+    - name: List files to deploy
+      run: |
+        echo "=== Files in repository ==="
+        ls -la
+        echo "=== Files to deploy ==="
+        find . -type f ! -path "./.git/*"
+    
     - name: Deploy to O2switch via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: ftp.njdev.re
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: cicd-test.njdev.re/
+        server-dir: /cicd-test.njdev.re/
+        dry-run: true
