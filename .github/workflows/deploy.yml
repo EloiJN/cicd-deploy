@@ -13,23 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.1'
-        extensions: mbstring, json
-    
-    - name: Install Composer dependencies
-      run: composer install --no-dev --optimize-autoloader
-    
-    - name: Run tests (optional)
-      run: |
-        if [ -f "vendor/bin/phpunit" ]; then
-          vendor/bin/phpunit tests
-        else
-          echo "No tests found, skipping..."
-        fi
-    
     - name: Deploy to O2switch via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
@@ -41,6 +24,5 @@ jobs:
           **/.git*
           **/.git*/**
           **/node_modules/**
-          **/tests/**
           **/.env
           **/README.md
