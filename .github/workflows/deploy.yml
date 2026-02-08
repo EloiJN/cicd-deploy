@@ -19,5 +19,4 @@ jobs:
         server: ftp.njdev.re
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /cicd-test.njdev.re/
-        local-dir: ./
+        server-dir: cicd-test.njdev.re/
