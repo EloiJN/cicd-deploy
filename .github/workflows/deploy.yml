@@ -19,7 +19,7 @@ jobs:
         server: ftp.njdev.re
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /home/nelu4937/njdev.re/cicd-deploy/
+        server-dir: /cicd-test.njdev.re/
         exclude: |
           **/.git*
           **/.git*/**
